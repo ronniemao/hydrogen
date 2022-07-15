@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.0
+
+### Minor Changes
+
+- `CartLineQuantityAdjustButton`, `BuyNowButton`, and `AddToCartButton` now have an `as` property. The types for these components have also been improved. ([#1827](https://github.com/Shopify/hydrogen/pull/1827)) by [@blittle](https://github.com/blittle)
+
+### Patch Changes
+
+- `locale` calculation logic and docs have been updated to support Shopify languages with extended language subtags. ([#1836](https://github.com/Shopify/hydrogen/pull/1836)) by [@lordofthecactus](https://github.com/lordofthecactus)
+
+  The following is how we calculate `locale`:
+  If the Shopify `language` includes a region, then this value is used to calculate the `locale` and `countryCode` is disregarded. For example, if `language` is `PT_BR` (Brazilian Portuguese), then `locale` is calculated as `PT-BR`.
+  If the Shopify `language` doesn't include a region, then this value is merged with the `countryCode` to calculate the `locale`. For example, if `language` is `EN` (English) and `countryCode` is `US` (United States), then `locale` is calculated as `EN-US`.
+
+* Allow `sourceProps` to be passed to `<Video/>`'s underlying `<source>` elements. ([#1847](https://github.com/Shopify/hydrogen/pull/1847)) by [@frehner](https://github.com/frehner)
+
 ## 1.1.0
 
 ### Migration for Stores based on the "Demo Store" template
@@ -23,7 +39,7 @@ If your Store is based on the "Demo Store" tempate, and you are using the `test:
   } from '@shopify/hydrogen/platforms';
 
   // Platform entry handler
-  export default function (request) {
+  export default function(request) {
     if (isAsset(new URL(request.url).pathname)) {
       return platformAssetHandler(request);
     }
